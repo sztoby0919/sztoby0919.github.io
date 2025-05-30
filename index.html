@@ -64,9 +64,27 @@
                     <h3>游戏</h3>
                     <p>我喜欢的游戏推荐</p>
                     <div class="card-gallery">
-                        <div class="gallery-item">游戏截图1</div>
-                        <div class="gallery-item">游戏截图2</div>
-                        <div class="gallery-item">游戏截图3</div>
+                        <div class="gallery-item">
+                            <label for="game-upload-1" class="upload-label">
+                                <span>点击上传游戏截图</span>
+                                <input type="file" id="game-upload-1" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'game-preview-1')">
+                            </label>
+                            <img id="game-preview-1" class="preview-image" src="#" alt="">
+                        </div>
+                        <div class="gallery-item">
+                            <label for="game-upload-2" class="upload-label">
+                                <span>点击上传游戏截图</span>
+                                <input type="file" id="game-upload-2" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'game-preview-2')">
+                            </label>
+                            <img id="game-preview-2" class="preview-image" src="#" alt="">
+                        </div>
+                        <div class="gallery-item">
+                            <label for="game-upload-3" class="upload-label">
+                                <span>点击上传游戏截图</span>
+                                <input type="file" id="game-upload-3" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'game-preview-3')">
+                            </label>
+                            <img id="game-preview-3" class="preview-image" src="#" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="card">
@@ -74,10 +92,19 @@
                     <h3>音乐</h3>
                     <p>我的音乐收藏</p>
                     <div class="music-player">
-                        <div class="player-controls">
-                            <span>最近在听...</span>
-                            <div class="progress-bar"></div>
+                        <div class="music-upload">
+                            <label for="music-upload" class="upload-label">
+                                <span>点击上传音乐文件</span>
+                                <input type="file" id="music-upload" class="file-input" accept="audio/*" onchange="handleMusicUpload(this)">
+                            </label>
                         </div>
+                        <div id="music-list" class="music-list">
+                            <!-- 音乐列表将在这里显示 -->
+                        </div>
+                        <audio id="audio-player" controls class="audio-player">
+                            <source src="" type="audio/mpeg">
+                            你的浏览器不支持音频播放。
+                        </audio>
                     </div>
                 </div>
             </div>
@@ -120,10 +147,34 @@
                     <h3>校园生活</h3>
                     <p>记录精彩的校园时光</p>
                     <div class="photo-grid">
-                        <div class="photo-item">照片1</div>
-                        <div class="photo-item">照片2</div>
-                        <div class="photo-item">照片3</div>
-                        <div class="photo-item">照片4</div>
+                        <div class="photo-item">
+                            <label for="photo-upload-1" class="upload-label">
+                                <span>点击上传照片</span>
+                                <input type="file" id="photo-upload-1" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'photo-preview-1')">
+                            </label>
+                            <img id="photo-preview-1" class="preview-image" src="#" alt="">
+                        </div>
+                        <div class="photo-item">
+                            <label for="photo-upload-2" class="upload-label">
+                                <span>点击上传照片</span>
+                                <input type="file" id="photo-upload-2" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'photo-preview-2')">
+                            </label>
+                            <img id="photo-preview-2" class="preview-image" src="#" alt="">
+                        </div>
+                        <div class="photo-item">
+                            <label for="photo-upload-3" class="upload-label">
+                                <span>点击上传照片</span>
+                                <input type="file" id="photo-upload-3" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'photo-preview-3')">
+                            </label>
+                            <img id="photo-preview-3" class="preview-image" src="#" alt="">
+                        </div>
+                        <div class="photo-item">
+                            <label for="photo-upload-4" class="upload-label">
+                                <span>点击上传照片</span>
+                                <input type="file" id="photo-upload-4" class="file-input" accept="image/*" onchange="handleImageUpload(this, 'photo-preview-4')">
+                            </label>
+                            <img id="photo-preview-4" class="preview-image" src="#" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="card">
@@ -143,7 +194,7 @@
             <div class="footer-section">
                 <h4>联系方式</h4>
                 <p>Email: your.email@example.com</p>
-                <p>GitHub: @your-username</p>
+                <p>GitHub: sztoby0919</p>
             </div>
             <div class="footer-section">
                 <h4>快速链接</h4>
@@ -157,5 +208,50 @@
             <p>© 2024 我的个人网站 | 用❤️制作</p>
         </div>
     </footer>
+
+    <script>
+    // 处理图片上传
+    function handleImageUpload(input, previewId) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById(previewId);
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                input.parentElement.style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+            // 这里可以添加将图片上传到云存储的代码
+        }
+    }
+
+    // 处理音乐上传
+    function handleMusicUpload(input) {
+        const file = input.files[0];
+        if (file) {
+            const musicList = document.getElementById('music-list');
+            const audioPlayer = document.getElementById('audio-player');
+            
+            // 创建音乐列表项
+            const musicItem = document.createElement('div');
+            musicItem.className = 'music-item';
+            musicItem.innerHTML = `
+                <span class="music-name">${file.name}</span>
+                <button onclick="playMusic('${URL.createObjectURL(file)}')">播放</button>
+            `;
+            
+            musicList.appendChild(musicItem);
+            // 这里可以添加将音乐上传到云存储的代码
+        }
+    }
+
+    // 播放音乐
+    function playMusic(url) {
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.src = url;
+        audioPlayer.play();
+    }
+    </script>
 </body>
 </html>

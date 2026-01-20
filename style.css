@@ -1,0 +1,62 @@
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1a1a1a; /* 深灰色背景 */
+    color: #f0f0f0; /* 浅白色文字 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: #2d2d2d;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 400px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #61dafb; /* 亮蓝色边框 */
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+}
+
+.avatar:hover {
+    transform: rotate(360deg); /* 鼠标放上去会旋转 */
+}
+
+h1 { margin-bottom: 0.5rem; }
+.subtitle { color: #aaa; margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+.bio {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #ccc;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    color: #1a1a1a;
+    background-color: #61dafb;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn:hover { background-color: #21a1f1; }

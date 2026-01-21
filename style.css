@@ -7,23 +7,40 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: lab(61.9% -34.2 12.12);
-    color: #2e2b2b; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* 优化点：使用径向渐变，营造顶部微光效果 */
+    background: radial-gradient(ellipse at top, #252d35 0%, #1a1a1a 100%);
+    background-attachment: fixed; /* 确保背景不随滚动条移动，维持深度感 */
+    
+    color: #f0f0f0;
+    display: block;
     min-height: 100vh;
 }
 
+.main-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /* 将原本的 max-height: 30vh 改为更合适的高度，比如 400px */
+    height: 300px; 
+    overflow: hidden;
+    border-radius: 15px; /* 让整体也有个圆角 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(97, 218, 251, 0.1); /* 极细的亮蓝色边框，呼应主题 */
+    margin-bottom: 3rem; /* 增加与下方 About Me 的间距 */
+    
+    
+}
+
 .container {
-    margin-right: auto;
-    margin-bottom: auto;
-    background: #2d2d2d;
-    padding: 3rem;
+    text-align: center;
+    
+    
+    padding: 1rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(7, 111, 129, 0.137);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     width: 90%;
-    max-width: 400px;
+    max-width: 300px;
+    
 }
 
 .avatar {
@@ -32,21 +49,13 @@ body {
     border-radius: 50%;
     border: 3px solid #61dafb; /* 亮蓝色边框 */
     margin-bottom: 1rem;
-    transition: transform 0.3s;
+    
 }
 
-.avatar:hover {
-    transform: rotate(360deg); /* 鼠标放上去会旋转 */
-}
 
-h1 { margin-bottom: 0.5rem; }
-.subtitle { color: #aaa; margin-bottom: 1.5rem; font-size: 0.9rem; }
 
-.bio {
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    color: #ccc;
-}
+h1 { margin-bottom: 0.5rem; font-size: 1rem;}
+.subtitle { color: #aaa; margin-bottom: 1.5rem; font-size: 0.7rem; }
 
 .btn {
     display: inline-block;
@@ -61,3 +70,90 @@ h1 { margin-bottom: 0.5rem; }
 }
 
 .btn:hover { background-color: #21a1f1; }
+
+.hero-section {
+    flex-grow: 1; /* 占据剩余的所有宽度 */
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/bg.jpg'); /* 添加半透明遮罩防止背景干扰文字 */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#poem-display {
+    color: white;
+    font-size: 1.5rem;
+    font-family: "楷体", "STKaiti", serif; /* 使用楷体增加文学气息 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* 给文字加阴影，确保在任何背景下都清晰 */
+    text-align: center;
+    line-height: 1.5;
+}
+
+#poem-display::after {
+    content: "|";
+    animation: blink 0.7s infinite;
+    margin-left: 5px;
+    color: #61dafb; /* 亮蓝色光标 */
+}
+
+@keyframes blink {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 修改 style.css */
+
+/* 1. 统一卡片样式：让下方的板块也拥有和上方类似的质感 */
+.info-section, .about-me {
+    background: rgba(45, 45, 45, 0.7); /* 半透明背景 */
+    backdrop-filter: blur(10px);        /* 核心：毛玻璃模糊效果 */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* 极其细微的边框增加精致感 */
+    padding: 2rem;
+    border-radius: 20px;               /* 更圆润的角 */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+}
+
+/* 2. 优化 About Me 的显示 */
+.about-me {
+    width: 90%;
+    max-width: 900px;
+    border-left: 5px solid #61dafb;    /* 强化侧边线条 */
+    font-size: 1.1rem;
+}
+
+.info-section {
+    
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem; /* 板块之间的间距 */
+    width: 90%;
+    max-width: 600px; /* 让下面的板块比个人卡片稍微宽一点，方便放文字 */
+    
+}
+
+.info-section h2 {
+    color: #00d2ff; /* 给标题一个亮眼的颜色 */
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #444; /* 添加一条分割线 */
+    padding-bottom: 0.5rem;
+}
+
+.info-section a {
+    color: #61dafb;          /* 使用你网页的亮蓝色主题色 */
+    text-decoration: none;   /* 去掉默认的下划线 */
+    transition: 0.3s;        /* 增加平滑过渡效果 */
+}
+
+/* 鼠标悬停时的效果 */
+.info-section a:hover {
+    color: #21a1f1;          /* 悬停时稍微变深一点 */
+    text-decoration: underline; /* 悬停时显示下划线，增加交互感 */
+}
+
+/* 关键：强制让点击过的链接也保持同样的颜色，不要变紫 */
+.info-section a:visited {
+    color: #61dafb;
+}
